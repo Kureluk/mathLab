@@ -1,0 +1,52 @@
+def main():
+    # 1. Задаємо універсальну множину U та підмножини A, B, C
+    # Приклад з числами (можна замінити на символи, наприклад: {'a', 'b', 'c', ...})
+    # U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    # A = {1, 2, 3, 4}
+    # B = {3, 4, 5, 6}
+    # C = {2, 6, 7}
+
+    U = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'}
+    A = {'a', 'b', 'c'}
+    B = {'b', 'c', 'd'}
+    C = {'d', 'e'}
+
+    # Перевірка: чи всі множини є підмножинами універсуму U
+    if not (A.issubset(U) and B.issubset(U) and C.issubset(U)):
+        raise ValueError("Множини A, B та C повинні повністю входити до універсуму U!")
+
+    # 2. Симетрична різниця: (A Δ B)
+    # В Python оператор ^ або метод .symmetric_difference()
+    a_delta_b = A ^ B
+
+    # 3. Доповнення до універсуму: not(A Δ B) = U \ (A Δ B)
+    not_a_delta_b = U - a_delta_b
+
+    # 4. Доповнення до універсуму: not(C) = U \ C
+    not_c = U - C
+
+    # 5. Перетин доповнень: not(A Δ B) ∩ not(C)
+    # В Python оператор & або метод .intersection()
+    result = not_a_delta_b & not_c
+
+    # Еквівалентний короткий запис через спрощену формулу: U \ ((A Δ B) ∪ C)
+    # result_alt = U - ((A ^ B) | C)
+
+    # Вивід проміжних та кінцевих результатів
+    print("Вхідні дані:")
+    print(f"U = {sorted(list(U))}")
+    print(f"A = {sorted(list(A))}")
+    print(f"B = {sorted(list(B))}")
+    print(f"C = {sorted(list(C))}\n")
+
+    print("Проміжні обчислення:")
+    print(f"A Δ B          = {sorted(list(a_delta_b))}")
+    print(f"not(A Δ B)     = {sorted(list(not_a_delta_b))}")
+    print(f"not(C)         = {sorted(list(not_c))}\n")
+
+    print("Результат виразу not(A Δ B) ∩ not(C):")
+    print(f"Відповідь: {sorted(list(result))}")
+
+
+if __name__ == "__main__":
+    main()
